@@ -40,53 +40,53 @@ const Home = () => {
 
 
 	const handlePlayPause = () => {
-  if (!audioRef.current) return;
+		if (!audioRef.current) return;
 
-  if (isPlaying) {
-    audioRef.current.pause();
-    setIsPlaying(false);
-  } else {
-    audioRef.current.play();
-    setIsPlaying(true);
-  }
-};
-const handleNext = () => {
-	if (songs.length === 0) return;
+		if (isPlaying) {
+			audioRef.current.pause();
+			setIsPlaying(false);
+		} else {
+			audioRef.current.play();
+			setIsPlaying(true);
+		}
+	};
+	const handleNext = () => {
+		if (songs.length === 0) return;
 
-	const nextIndex = (currentIndex + 1) % songs.length;
+		const nextIndex = (currentIndex + 1) % songs.length;
 
-	setCurrentIndex(nextIndex);
-};
-const handlePrevious = () => {
-	if (songs.length === 0) return;
+		setCurrentIndex(nextIndex);
+	};
+	const handlePrevious = () => {
+		if (songs.length === 0) return;
 
-	const prevIndex = (currentIndex - 1 + songs.length) % songs.length;
+		const prevIndex = (currentIndex - 1 + songs.length) % songs.length;
 
-	setCurrentIndex(prevIndex);
-};
+		setCurrentIndex(prevIndex);
+	};
 
 
 	return (
 		<div className="container-fluid">
 			<div className='container'>
 				<audio ref={audioRef} className='audio-player'></audio>
-			<div className="controls">
-				<button onClick={handlePrevious}> <i className="fa-solid fa-backward icon "></i></button>
-				<button onClick={handlePlayPause}>  {isPlaying ? <i class="fa-solid fa-pause icon"></i> : <i class="fa-solid fa-play icon"></i>}</button>
-				<button onClick={handleNext}><i className="fa-solid fa-forward icon"></i> </button>
-			</div>
-			<ul className='list-s'>
-				{songs.map((song, index) => (
-					<li 
-						key={song.id}
-						onClick={() =>
-							setCurrentIndex(index)}
-							  className={`song-item ${currentIndex === index ? "active" : ""}`}
-					>
-						{index + 1}.{song.name}
-					</li>
-				))}
-			</ul>
+				<div className="controls">
+					<button onClick={handlePrevious}> <i className="fa-solid fa-backward icon "></i></button>
+					<button onClick={handlePlayPause}>  {isPlaying ? <i class="fa-solid fa-pause icon"></i> : <i class="fa-solid fa-play icon"></i>}</button>
+					<button onClick={handleNext}><i className="fa-solid fa-forward icon"></i> </button>
+				</div>
+				<ul className='list-s'>
+					{songs.map((song, index) => (
+						<li
+							key={song.id}
+							onClick={() =>
+								setCurrentIndex(index)}
+							className={`song-item ${currentIndex === index ? "active" : ""}`}
+						>
+							{index + 1}.{song.name}
+						</li>
+					))}
+				</ul>
 			</div>
 		</div>
 	);
